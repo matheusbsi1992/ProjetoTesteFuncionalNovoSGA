@@ -198,8 +198,6 @@ public class TestePaginaTriagemAlternativa extends BaseTest {
         triagemAlternativaPage.setSelecionarTipoServico("TESTE");
         triagemAlternativaPage.setSelecionarLocaldoServico("TESTE");
         triagemAlternativaPage.setSelecionarStatusAtivo();
-
-
         triagemAlternativaPage.botaoSalvar();
 
         Assert.assertEquals("TRIAGEM ALTERNATIVA INSERIDO COM SUCESSO!!!", triagemAlternativaPage.mensagemDeExitoCampoPreenchidoComSucesso());
