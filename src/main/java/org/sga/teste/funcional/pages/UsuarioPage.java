@@ -11,7 +11,6 @@ import java.util.List;
 
 import static org.sga.teste.funcional.comunicacao.AcessoComunicacao.getComunicacaoDriverChrome;
 
-
 public class UsuarioPage {
 
     private DSL dsl;
@@ -27,7 +26,6 @@ public class UsuarioPage {
     public void setUsuario(String usuario) {
         dsl.escreve("formulariousuario:tabview:usuario", usuario);
     }
-
     //--Escrever o nome do usuario
     public void setNomeUsuario(String nomeUsuario) {
         dsl.escreve("formulariousuario:tabview:sobrenomeusuario", nomeUsuario);
@@ -39,6 +37,28 @@ public class UsuarioPage {
     //-Escrever a confirmacao da senha do usuario
     public void setConfirmacaoPassword(String confirmacaoPassword) {
         dsl.escreve("formulariousuario:tabview:senha", confirmacaoPassword);
+    }
+    //--selecionar o tipo de unidade
+    public void setSelecionarUnidade() {
+//        try {
+//            Thread.sleep(3000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+        sincronismo.sincronismoExplicito(By.id("formulariousuario:tabview:unidade"));
+        dsl.clicarBotao(By.xpath("//*[@id='formulariousuario:tabview:unidade']//span"));
+        dsl.clicarBotao(By.id("formulariousuario:tabview:unidade_1"));
+    }
+    //--selecionar o tipo de cargo
+    public void setSelecionarCargo() {
+//        try {
+//            Thread.sleep(3000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+        sincronismo.sincronismoExplicito(By.id("formulariousuario:tabview:cargo"));
+        dsl.clicarBotao(By.xpath("//*[@id='formulariousuario:tabview:cargo']//span"));
+        dsl.clicarBotao(By.id("formulariousuario:tabview:cargo_2"));
     }
     //--selecionar o tipo de status
     public void setSelecionarStatusAtivo() {
@@ -81,24 +101,23 @@ public class UsuarioPage {
         return errors;
     }
 
-    public void retornarListadeValoresPermissao() {
+    public void retornarListadeValoresServico() {
 
-        List<Object> listaPermissao = Arrays.asList("ATENDIMENTO"
-                , "CARGO"
-                , "ESTATÍSTICA"
-                , "LOCAL"
-                , "MONITOR"
-                , "PAINEL DE ATENDIMENTO"
-                , "REINICIAR SENHA"
-                , "REINICIAR SENHA POR SERVIÇO"
-                , "SERVIÇO"
-                , "TRIAGEM ALTERNATIVA"
-                , "TRIAGEM CHAMADACLIENTE"
-                , "UNIDADE"
-                , "USUÁRIO");
+        List<Object> listaServico = Arrays.asList("CONVÊNIO HAPVIDA"
+                ,"CONVÊNIO IPES"
+                ,"ELETROENCEFALOGRAMA"
+                ,"ENDOSCOPIA"
+                ,"HOLTER"
+                ,"LABORATÓRIO"
+                ,"MAMOGRAFIA"
+                ,"MAPA"
+                ,"PARTICULAR"
+                ,"PRÉ-CONSULTA"
+                ,"RAIOX"
+                ,"TESTE");
 
         for (Object objetoPermissao :
-                listaPermissao) {
+                listaServico) {
             sincronismo.sincronismoExplicitoClicar(By.xpath("//input[@value='" + objetoPermissao.toString() + "']//../..//span"));
         }
 
@@ -110,7 +129,7 @@ public class UsuarioPage {
         return dsl.obterTexto(By.xpath("//span[@class='ui-messages-info-summary']"));
     }
 
-    public String mensagemDeNaoExisteElementoNaTabelaCargo() {
+    public String mensagemDeNaoExisteElementoNaTabelaUsuario() {
         sincronismo.sincronismoExplicito(By.xpath("//td[.='Nenhum Registro Encontrado.']"));
         return dsl.obterTexto(By.xpath("//td[.='Nenhum Registro Encontrado.']"));
     }
@@ -132,17 +151,16 @@ public class UsuarioPage {
         dsl.clicarBotao(By.xpath("//a[.='Geral']"));
     }
 
-    //Botao contido na pagina de insercao para a Aba Geral
-    public void botaoPermissoes() {
-        sincronismo.sincronismoExplicitoClicar(By.xpath("//a[.='Permissões']"));
+    //Botao contido na pagina de insercao para a Aba Servicos
+    public void botaoServicos() {
+        sincronismo.sincronismoExplicitoClicar(By.xpath("//a[.='Serviços']"));
         //dsl.clicarBotao(By.xpath("//a[.='Permissões']"));
     }
-
+    //Botao de Buscar na pagina de consulta
     public void botaoBuscar() {
         //dsl.clicarBotao("consultar:j_idt172");
         //dsl.clicarBotao(By.cssSelector("span.ui-button-icon-left ui-icon ui-c fa fa-search"));
         dsl.clicarBotao(By.xpath("//div[@class='ui-panel ui-widget ui-widget-content ui-corner-all ui-g-12']//button"));
     }
-
 
 }
