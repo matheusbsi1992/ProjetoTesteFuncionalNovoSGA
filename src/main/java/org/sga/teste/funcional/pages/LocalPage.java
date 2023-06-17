@@ -1,8 +1,8 @@
 package org.sga.teste.funcional.pages;
 
 import org.openqa.selenium.By;
-import org.sga.teste.funcional.util.Sincronismo;
 import org.sga.teste.funcional.core.DSL;
+import org.sga.teste.funcional.util.Sincronismo;
 
 
 public class LocalPage {
@@ -46,8 +46,8 @@ public class LocalPage {
 
     //Botao contido na pagina de Listar
     public void botaoNovo() {
-       //sincronismo.sincronismoExplicitoClicar(By.xpath("//span[.='Novo']"));
-       dsl.clicarBotao(By.xpath("//span[.='Novo']"));
+        //sincronismo.sincronismoExplicitoClicar(By.xpath("//span[.='Novo']"));
+        dsl.clicarBotao(By.xpath("//span[.='Novo']"));
     }
 
     //Botao contido na pagina de Listar

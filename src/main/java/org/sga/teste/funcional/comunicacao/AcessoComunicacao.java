@@ -17,7 +17,6 @@ public class AcessoComunicacao {
     }
 
 
-
     private static ChromeOptions opcaoDriverChrome() {
         //System.setProperty("webdriver.chrome.driver", "C:\\Users\\matheus.andrade\\Documents\\ProjetoTesteFuncionalSGA\\api\\chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();

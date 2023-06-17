@@ -6,32 +6,40 @@ import org.sga.teste.funcional.core.DSL;
 import org.sga.teste.funcional.util.Sincronismo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.sga.teste.funcional.comunicacao.AcessoComunicacao.getComunicacaoDriverChrome;
 
 
-public class ServicoPage {
+public class UsuarioPage {
 
     private DSL dsl;
 
     private Sincronismo sincronismo;
 
-    public ServicoPage() {
+    public UsuarioPage() {
         sincronismo = new Sincronismo();
         dsl = new DSL();
     }
 
     //Campos contidos na pagina de Insercao, Alteracao e Remoção
-    public void setNomeServico(String nomeServico) {
-        dsl.escreve("nomeservico", nomeServico);
+    public void setUsuario(String usuario) {
+        dsl.escreve("formulariousuario:tabview:usuario", usuario);
     }
 
-    //--Escrever o tipo de descricao no campo de descricaoservico
-    public void setDescricaoServico(String nomeDescricaoServico) {
-        dsl.escreve("descricaoservico", nomeDescricaoServico);
+    //--Escrever o nome do usuario
+    public void setNomeUsuario(String nomeUsuario) {
+        dsl.escreve("formulariousuario:tabview:sobrenomeusuario", nomeUsuario);
     }
-
+    //-Escrever a senha do usuario
+    public void setPassword(String password) {
+        dsl.escreve("formulariousuario:tabview:password", password);
+    }
+    //-Escrever a confirmacao da senha do usuario
+    public void setConfirmacaoPassword(String confirmacaoPassword) {
+        dsl.escreve("formulariousuario:tabview:senha", confirmacaoPassword);
+    }
     //--selecionar o tipo de status
     public void setSelecionarStatusAtivo() {
 //        try {
@@ -39,14 +47,9 @@ public class ServicoPage {
 //        } catch (InterruptedException e) {
 //            throw new RuntimeException(e);
 //        }
-        sincronismo.sincronismoExplicito(By.id("status"));
-        dsl.clicarBotao(By.xpath("//*[@id='status']//span"));
-        dsl.clicarBotao(By.id("status_1"));
-    }
-
-    //campo contido para buscar o Texto inserido a seguir
-    public void setNomeServicoBuscar(String nomeServicoBuscarBuscar) {
-        dsl.escreve(By.id("consultar:j_idt171"), nomeServicoBuscarBuscar);
+        sincronismo.sincronismoExplicito(By.id("formulariousuario:tabview:status"));
+        dsl.clicarBotao(By.xpath("//*[@id='formulariousuario:tabview:status']//span"));
+        dsl.clicarBotao(By.id("formulariousuario:tabview:status_1"));
     }
 
     //campo contido para buscar o Texto inserido a seguir
@@ -66,9 +69,39 @@ public class ServicoPage {
         List<WebElement> listadeElementosErros = getComunicacaoDriverChrome().findElements(By.xpath("//span[@class='ui-message-error-detail']"));
         List<String> errors = new ArrayList<>();
         for (WebElement element : listadeElementosErros) {
-            errors.add(element.getText());
+            if (!element.getText().equalsIgnoreCase("")) {
+                errors.add(element.getText());
+            }
         }
+        //forca a lista de String remover espaco em branco
+        if (errors.toString().equalsIgnoreCase("")) {
+            errors.remove("");
+        }
+
         return errors;
+    }
+
+    public void retornarListadeValoresPermissao() {
+
+        List<Object> listaPermissao = Arrays.asList("ATENDIMENTO"
+                , "CARGO"
+                , "ESTATÍSTICA"
+                , "LOCAL"
+                , "MONITOR"
+                , "PAINEL DE ATENDIMENTO"
+                , "REINICIAR SENHA"
+                , "REINICIAR SENHA POR SERVIÇO"
+                , "SERVIÇO"
+                , "TRIAGEM ALTERNATIVA"
+                , "TRIAGEM CHAMADACLIENTE"
+                , "UNIDADE"
+                , "USUÁRIO");
+
+        for (Object objetoPermissao :
+                listaPermissao) {
+            sincronismo.sincronismoExplicitoClicar(By.xpath("//input[@value='" + objetoPermissao.toString() + "']//../..//span"));
+        }
+
     }
 
     //Obter mensagem de exito ao inserir ou alterar o Local
@@ -77,19 +110,32 @@ public class ServicoPage {
         return dsl.obterTexto(By.xpath("//span[@class='ui-messages-info-summary']"));
     }
 
-    public String mensagemDeNaoExisteElementoNaTabelaLocal() {
-        //sincronismo.sincronismoExplicito(By.xpath("//span[@class='ui-messages-info-summary']"));
+    public String mensagemDeNaoExisteElementoNaTabelaCargo() {
+        sincronismo.sincronismoExplicito(By.xpath("//td[.='Nenhum Registro Encontrado.']"));
         return dsl.obterTexto(By.xpath("//td[.='Nenhum Registro Encontrado.']"));
     }
 
     //Botao contido na pagina de Listar
     public void botaoNovo() {
+        //sincronismo.sincronismoExplicitoClicar(By.xpath("//span[.='Novo']"));
         dsl.clicarBotao(By.xpath("//span[.='Novo']"));
     }
 
     //Botao contido na pagina de Listar
     public void botaoSalvar() {
         dsl.clicarBotao(By.xpath("//span[.='Salvar']"));
+    }
+
+    //Botao contido na pagina de insercao para a Aba Geral
+    public void botaoGeral() {
+        //sincronismo.sincronismoExplicitoClicar(By.xpath("//a[.='Geral']"));
+        dsl.clicarBotao(By.xpath("//a[.='Geral']"));
+    }
+
+    //Botao contido na pagina de insercao para a Aba Geral
+    public void botaoPermissoes() {
+        sincronismo.sincronismoExplicitoClicar(By.xpath("//a[.='Permissões']"));
+        //dsl.clicarBotao(By.xpath("//a[.='Permissões']"));
     }
 
     public void botaoBuscar() {

@@ -210,8 +210,17 @@ public class DSL {
 
     //*********** Tabela **********//
     public void clicarBotaoTabelaDeletar(String idTabela, String colunaTabela, String valor, String colunaBotao, String radical) {
+
+        new Sincronismo().sincronismoExplicito(By.xpath("//table//thead//tr"));
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         //---procurar coluna do registro
         WebElement tabela = getComunicacaoDriverChrome().findElement(By.xpath("//table//thead//tr"));
+
         int idColuna = obterIndiceColuna(colunaTabela, tabela);
 
         System.out.println(tabela.getText() + " " + idColuna);
@@ -221,8 +230,15 @@ public class DSL {
         //---procurar coluna do botao
         int idColunaBotao = obterIndiceColuna(colunaBotao, tabela);
         //---clicar no botao da celula encontrada
-        WebElement celula = tabela.findElement(By.xpath("//tr[" + idLinha + "]//td[" + idColunaBotao + "]//button[.='Excluir']"));
-        celula.click();
+        WebElement celula;
+
+        if (idColunaBotao == -1) {
+            celula = tabela.findElement(By.xpath("//tr//td//button[.='Excluir']"));
+            celula.click();
+        } else {
+            celula = tabela.findElement(By.xpath("//tr[" + idLinha + "]//td[" + idColunaBotao + "]//button[.='Excluir']"));
+            celula.click();
+        }
         //*[@id='consultar:overviewTableUserLocal:4:j_idt181']
         clicarBotao(By.xpath("//*[@id='" + idTabela + "" + (idLinha - 1) + "" + radical + "']"));
 
@@ -231,10 +247,10 @@ public class DSL {
         //celula.findElement(By.xpath("//span[.='Excluir']")).click();
         //celula.findElement(By.id("consultar:overviewTableUserLocal:"+idLinha+":idexcluir")).click();
         //celula.findElement(By.cssSelector("span.glyphicon.glyphicon-remove-circle")).click();
-
     }
 
     public void clicarBotaoTabelaEditar(String idTabela, String colunaTabela, String valor, String colunaBotao, String radical) {
+
         //---procurar coluna do registro
         WebElement tabela = getComunicacaoDriverChrome().findElement(By.xpath("//table//thead//tr"));
         int idColuna = obterIndiceColuna(colunaTabela, tabela);
@@ -246,8 +262,15 @@ public class DSL {
         //---procurar coluna do botao
         int idColunaBotao = obterIndiceColuna(colunaBotao, tabela);
         //---clicar no botao da celula encontrada
-        WebElement celula = tabela.findElement(By.xpath("//tr[" + idLinha + "]//td[" + idColunaBotao + "]//button[.='Editar']"));
-        celula.click();
+        WebElement celula;
+        if (idColunaBotao == -1) {
+            celula = tabela.findElement(By.xpath("//tr//td//button[.='Editar']"));
+            celula.click();
+        } else {
+            celula = tabela.findElement(By.xpath("//tr[" + idLinha + "]//td[" + idColunaBotao + "]//button[.='Editar']"));
+            celula.click();
+        }
+
 
         //---//*[@id='consultar:overviewTableUserLocal:4:j_idt181']
         clicarBotao(By.xpath("//*[@id='" + idTabela + "" + (idLinha - 1) + "" + radical + "']"));
@@ -330,7 +353,7 @@ public class DSL {
      */
 
 
-    private int obterIndiceLinha(String valor,  WebElement tabela, String idTabela, int idColuna) {
+    private int obterIndiceLinha(String valor, WebElement tabela, String idTabela, int idColuna) {
 
         List<WebElement> linhas = new ArrayList<WebElement>();
         //WebElement webElement  =tabela.findElement(By.xpath("//tr["+idLinhaEspecifica+"]//td["+ idColuna +"]"));
@@ -350,16 +373,19 @@ public class DSL {
         //---a.ui-paginator-page ui-state-default ui-state-active ui-corner-all
 
         for (int i = 0; i < linhas.size(); i++) {
+
             if (linhas.get(i).getText().equalsIgnoreCase(valor)) {
                 idLinha = (i + 1);
                 break;
             } else {
                 if (idLinha == -1) {
                     for (WebElement elementPrincipal : listaElementoPaginacao) {
+
                         if (linhas.get(i).getText().equalsIgnoreCase(valor)) {
                             idLinha = (i + 1);
                             break;
                         } else {
+
                             elementPrincipal.click();
                         }
                     }
@@ -372,12 +398,17 @@ public class DSL {
     }
 
     private int obterIndiceColuna(String colunaTabela, WebElement tabela) {
-        List<WebElement> colunas = tabela.findElements(By.xpath(".//th"));
-
+        //new Sincronismo().sincronismoExplicito(By.xpath("//table/thead/tr//th"));
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        List<WebElement> colunas =getComunicacaoDriverChrome().findElements(By.xpath("//table/thead/tr//th"));
+        // = tabela.findElements(By.xpath(".//th"));
         int idColuna = -1;
 
         for (int i = 0; i < colunas.size(); i++) {
-            System.out.println(colunas.get(i).getText());
             if (colunas.get(i).getText().equalsIgnoreCase(colunaTabela)) {
                 idColuna = (i + 1);
                 break;

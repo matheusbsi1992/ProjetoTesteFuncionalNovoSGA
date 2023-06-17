@@ -7,6 +7,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.sga.teste.funcional.pages.LoginPage;
@@ -22,7 +23,7 @@ public class BaseTest {
     private static LoginPage loginPage = new LoginPage();
     @Rule
     public TestName name = new TestName();
-    private DSL dsl = new DSL();
+    private static DSL dsl = new DSL();
 
     @BeforeClass
     public static void acessoValidoParaLogin() {
@@ -37,9 +38,16 @@ public class BaseTest {
 
     @AfterClass
     public static void encerrarComunicacao() {
+        //--PROCESSO PARA FAZER O LOGOUT--INICIA
+        dsl.clicarBotao(By.xpath("//span[@class='hidden-xs']"));
+        dsl.clicarBotao(By.xpath("//span[@class='ui-button-icon-left ui-icon ui-c fa fa-sign-out']"));
+        dsl.clicarBotao(By.xpath("//span[.='Logout']//../../div//span[.='Sim']"));
+        //--PROCESSO PARA FAZER O LOGOUT--ENCERRADO
+        //--PROCESSO INICIA PARA FINALIZAR O NAVEGADOR
         if (Propriedades.FINALIZA) {
             getEncerrarNavegadorSessao();
         }
+
     }
 
     @After

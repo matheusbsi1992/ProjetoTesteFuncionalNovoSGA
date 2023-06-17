@@ -2,9 +2,9 @@ package org.sga.teste.funcional.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.sga.teste.funcional.core.DSL;
 import org.sga.teste.funcional.util.Acoes;
 import org.sga.teste.funcional.util.Sincronismo;
-import org.sga.teste.funcional.core.DSL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class TriagemAlternativaPage {
 
     private Sincronismo sincronismo;
 
-    private Acoes  acoes;
+    private Acoes acoes;
 
     public TriagemAlternativaPage() {
         sincronismo = new Sincronismo();
@@ -75,9 +75,9 @@ public class TriagemAlternativaPage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-         // sincronismo.sincronismoExplicito(By.id("status_panel"));
+        // sincronismo.sincronismoExplicito(By.id("status_panel"));
 
-          sincronismo.sincronismoExplicitoClicar(By.xpath("//div[@id='status']"));
+        sincronismo.sincronismoExplicitoClicar(By.xpath("//div[@id='status']"));
 //        WebElement webDriverElement = getComunicacaoDriverChrome().findElement(By.xpath("//*[@id='servico_items']//li[.='" + localdoServico + "']"));
 //        dsl.executarJS("var objDiv = document.getElementById(\"servico_items\");\n" +
 //       "objDiv.scrollTop = objDiv.scrollHeight;",webDriverElement.getLocation().y);

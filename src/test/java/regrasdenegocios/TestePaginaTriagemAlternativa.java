@@ -190,7 +190,7 @@ public class TestePaginaTriagemAlternativa extends BaseTest {
     }
 
     @Test
-    public void teste09DeveVerificarAInsercaoDoServico() {
+    public void teste09DeveVerificarAInsercaoDaTriagemAlternativa() {
 
         dsl.limparCampo("siglatriagemalternativa");
 

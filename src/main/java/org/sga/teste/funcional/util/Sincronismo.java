@@ -24,12 +24,11 @@ public class Sincronismo {
         webDriverWait.pollingEvery(Duration.ofSeconds(0));
     }
 
-    public void sincronismoExplicitoClicar(By by){
+    public void sincronismoExplicitoClicar(By by) {
         WebDriverWait wait = new WebDriverWait(getComunicacaoDriverChrome(), Duration.ofSeconds(30));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
         element.click();
     }
-
 
 
 }

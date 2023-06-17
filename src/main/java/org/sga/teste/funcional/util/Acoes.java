@@ -7,11 +7,10 @@ import static org.sga.teste.funcional.comunicacao.AcessoComunicacao.getComunicac
 
 public class Acoes {
 
-    public void acaoScroll(WebElement webElement){
+    public void acaoScroll(WebElement webElement) {
         Actions actions = new Actions(getComunicacaoDriverChrome());
         actions.scrollToElement(webElement).perform();
     }
-
 
 
 }
