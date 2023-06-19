@@ -43,7 +43,6 @@ public class TestePaginaUsuario extends BaseTest {
         BaseTest.nomePasta = "TestePaginaUsuario";
 
     }
-
     @Test
     public void teste01DeveVerificarCampoVaziodoUsuario() {
 
@@ -87,7 +86,6 @@ public class TestePaginaUsuario extends BaseTest {
         Assert.assertEquals("USUÁRIO INSERIDO COM SUCESSO!!!", usuarioPage.mensagemDeExitoCampoPreenchidoComSucesso());
 
     }
-
     @Test
     public void teste04DeveValidarSeExisteOUsuario() {
         dsl.limparCampo("formulariousuario:tabview:usuario");
@@ -95,7 +93,6 @@ public class TestePaginaUsuario extends BaseTest {
         usuarioPage.botaoSalvar();
         Assert.assertEquals("USUÁRIO EXISTE", usuarioPage.mensagemDeErroCampoNaoPreenchidoComSucesso());
     }
-
     @Test
     public void teste05DeveVerificarCampoDeDigitosMaiordoUsuario() throws InterruptedException {
 
@@ -146,7 +143,6 @@ public class TestePaginaUsuario extends BaseTest {
         Assert.assertEquals("Nenhum Registro Encontrado.", usuarioPage.mensagemDeNaoExisteElementoNaTabelaUsuario());
 
     }
-
     @Test
     public void teste08DeveVerificarAAtualizacaoDoUsuario() {
         //---Processo que necessita procurar os dados por  colunas e linhas na tabela.
@@ -174,7 +170,6 @@ public class TestePaginaUsuario extends BaseTest {
         Assert.assertEquals("USUÁRIO ALTERADO COM SUCESSO!!!", usuarioPage.mensagemDeExitoCampoPreenchidoComSucesso());
 
     }
-
     @Test
     public void teste09DeveExcluirOUsuario() throws InterruptedException {
 
@@ -197,7 +192,6 @@ public class TestePaginaUsuario extends BaseTest {
         Assert.assertEquals(12, webElementList.size());
 
     }
-
     @Test
     public void teste10DeveVerificarAInsercaoDoUsuario() {
 
