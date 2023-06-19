@@ -93,7 +93,7 @@ public class UsuarioPage {
                 errors.add(element.getText());
             }
         }
-        //forca a lista de String remover espaco em branco
+        //forca a lista se existir campo vazio na tentativa de tratar este processo nesta etapa para o campo em branco
         if (errors.toString().equalsIgnoreCase("")) {
             errors.remove("");
         }
