@@ -38,6 +38,13 @@ public class UsuarioPage {
     public void setConfirmacaoPassword(String confirmacaoPassword) {
         dsl.escreve("formulariousuario:tabview:senha", confirmacaoPassword);
     }
+    //-Escrever para a alteracao de senha
+    public void setSenhaAtualizacao(String senhaAtualizacao){
+        dsl.escreve("formulariosenhaeditarusuario:password",senhaAtualizacao);
+    }
+    public void setConfirmacaoSenhaAtualizacao(String confirmacaoSenhaAtualizacao){
+        dsl.escreve("formulariosenhaeditarusuario:senha",confirmacaoSenhaAtualizacao);
+    }
     //--selecionar o tipo de unidade
     public void setSelecionarUnidade() {
 //        try {
@@ -162,5 +169,13 @@ public class UsuarioPage {
         //dsl.clicarBotao(By.cssSelector("span.ui-button-icon-left ui-icon ui-c fa fa-search"));
         dsl.clicarBotao(By.xpath("//div[@class='ui-panel ui-widget ui-widget-content ui-corner-all ui-g-12']//button"));
     }
+    //Botao de alteracao na pagina de Editar Usuario
+    public void botaoAlterarSenha(){
+        dsl.clicarBotao(By.xpath("//span[.='Alterar Senha do Usuário']"));
+    }
+    public void alterarSenha(){
+        dsl.clicarBotao(By.xpath("//*[@id='formulariosenhaeditarusuario']//..//span[.='Alterar']"));
+    }
+
 
 }
