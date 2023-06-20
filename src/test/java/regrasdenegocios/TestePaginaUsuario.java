@@ -47,7 +47,6 @@ public class TestePaginaUsuario extends BaseTest {
     public void teste01DeveVerificarCampoVaziodoUsuario() {
 
         usuarioPage.botaoSalvar();
-        usuarioPage.botaoGeral();
 
         Assert.assertTrue(Arrays.asList("INFORME USUÁRIO"
                 , "INFORME O NOME DO USUÁRIO"
@@ -59,8 +58,8 @@ public class TestePaginaUsuario extends BaseTest {
     }
     @Test
     public void teste02DeveVerificarCampoVaziodoUsuarip() {
-        usuarioPage.botaoSalvar();
         usuarioPage.botaoServicos();
+        usuarioPage.botaoSalvar();
 
         Assert.assertTrue(Arrays.asList("INFORME SERVIÇO"
         ).containsAll(usuarioPage.identificarErros()));
@@ -69,7 +68,6 @@ public class TestePaginaUsuario extends BaseTest {
     @Test
     public void teste03DeveVerificarAInsercaoDoUsuario() {
 
-        usuarioPage.botaoGeral();
         usuarioPage.setUsuario("Testando");
         usuarioPage.setNomeUsuario("Testando");
         usuarioPage.setPassword("12345678");
@@ -108,9 +106,10 @@ public class TestePaginaUsuario extends BaseTest {
         ///---- 5 e 200 -> 225
         usuarioPage.botaoSalvar();
 
-        Assert.assertTrue(Arrays.asList("O USUÁRIO SÓ DEVE TER 5 E 200 DE DÍGITOS"
-                , "O NOME DO USUÁRIO SÓ DEVE TER 5 E 200 DE DÍGITOS"
-        ).containsAll(usuarioPage.identificarErros()));
+
+        Assert.assertTrue(usuarioPage.identificarErros().contains("O USUÁRIO SÓ DEVE TER 5 E 200 DE DÍGITOS"));
+
+        Assert.assertTrue(usuarioPage.identificarErros().contains("O NOME DO USUÁRIO SÓ DEVE TER 5 E 200 DE DÍGITOS"));
 
     }
     @Test
@@ -158,12 +157,16 @@ public class TestePaginaUsuario extends BaseTest {
 
         Assert.assertEquals("CONSULTADO COM SUCESSO!!!", usuarioPage.mensagemDeExitoCampoPreenchidoComSucesso());
 
-        dsl.clicarBotaoTabelaEditar("consultar:overviewTableUserUsuario:", "Usuário, Cargo e seus Serviços", "TESTANDO", "Opções", ":j_idt187");
+        dsl.clicarBotaoTabelaEditar("consultar:overviewTableUserUsuario:", "Usuário, Cargo e seus Serviços", "TESTANDO", "Opções", "j_idt191");
 
         getComunicacaoDriverChrome().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
         dsl.limparCampo("formulariousuario:tabview:usuario");
         dsl.limparCampo("formulariousuario:tabview:sobrenomeusuario");
+
+        usuarioPage.setUsuario("TESTANDO13");
+
+        usuarioPage.setNomeUsuario("TESTANDO13");
 
         usuarioPage.botaoSalvar();
 
@@ -183,7 +186,7 @@ public class TestePaginaUsuario extends BaseTest {
         //Clicar para buscar o campo
         usuarioPage.botaoBuscar();
         //identificar tabela, coluna principal com o seu respectivo valor e a opcao, apos remover o item correspondente
-        dsl.clicarBotaoTabelaDeletar("consultar:overviewTableUserUsuario:", "Usuário, Cargo e seus Serviços", "TESTANDO13", "Opções", ":j_idt187");
+        dsl.clicarBotaoTabelaDeletar("consultar:overviewTableUserUsuario:", "Usuário, Cargo e seus Serviços", "TESTANDO13", "Opções", ":j_idt190");
 
         Thread.sleep(3000);
 

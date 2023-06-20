@@ -2,6 +2,8 @@ package org.sga.teste.funcional.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.sga.teste.funcional.core.DSL;
 import org.sga.teste.funcional.util.Sincronismo;
 
@@ -123,12 +125,14 @@ public class UsuarioPage {
                 ,"RAIOX"
                 ,"TESTE");
 
-        for (Object objetoPermissao :
-                listaServico) {
-            sincronismo.sincronismoExplicitoClicar(By.xpath("//input[@value='" + objetoPermissao.toString() + "']//../..//span"));
+
+        for (int i=0;i< listaServico.size();i++){
+            sincronismo.sincronismoExplicitoClicar(By.xpath("//input[@id='formulariousuario:tabview:servico:" + i + "']//../..//span"));
         }
 
     }
+
+
 
     //Obter mensagem de exito ao inserir ou alterar o Local
     public String mensagemDeExitoCampoPreenchidoComSucesso() {
