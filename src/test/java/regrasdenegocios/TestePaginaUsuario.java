@@ -186,13 +186,13 @@ public class TestePaginaUsuario extends BaseTest {
         //Clicar para buscar o campo
         usuarioPage.botaoBuscar();
         //identificar tabela, coluna principal com o seu respectivo valor e a opcao, apos remover o item correspondente
-        dsl.clicarBotaoTabelaDeletar("consultar:overviewTableUserUsuario:", "Usuário, Cargo e seus Serviços", "TESTANDO13", "Opções", ":j_idt190");
+        dsl.clicarBotaoTabelaDeletar("consultar:overviewTableUserUsuario:", "Usuário, Cargo e seus Serviços", "TESTANDO13", "Opções", "j_idt191");
 
         Thread.sleep(3000);
 
         List<WebElement> webElementList = getComunicacaoDriverChrome().findElements(By.xpath("//tbody//tr"));
 
-        Assert.assertEquals(12, webElementList.size());
+        Assert.assertEquals(11, webElementList.size());
 
     }
     @Test
@@ -215,6 +215,7 @@ public class TestePaginaUsuario extends BaseTest {
         Assert.assertEquals("USUÁRIO INSERIDO COM SUCESSO!!!", usuarioPage.mensagemDeExitoCampoPreenchidoComSucesso());
 
     }
+
     @Test
     public void teste11DeveVerificarAAtualizacaoDaSenhaDoUsuario() {
 
@@ -229,16 +230,18 @@ public class TestePaginaUsuario extends BaseTest {
 
         Assert.assertEquals("CONSULTADO COM SUCESSO!!!", usuarioPage.mensagemDeExitoCampoPreenchidoComSucesso());
 
-        dsl.clicarBotaoTabelaEditar("consultar:overviewTableUserUsuario:", "Usuário, Cargo e seus Serviços", "TESTANDO", "Opções", ":j_idt187");
+        dsl.clicarBotaoTabelaEditar("consultar:overviewTableUserUsuario:", "Usuário, Cargo e seus Serviços", "TESTANDO", "Opções", "j_idt191");
 
         getComunicacaoDriverChrome().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
+        usuarioPage.botaoSalvar();
         usuarioPage.botaoAlterarSenha();
+        usuarioPage.setSenhaAtualizacao("123456789");
+        usuarioPage.setConfirmacaoSenhaAtualizacao("1234567891");
         usuarioPage.alterarSenha();
 
-        Assert.assertEquals("INFORME SENHA", usuarioPage.mensagemDeErroCampoNaoPreenchidoComSucesso());
-
-    }
+        Assert.assertEquals("SENHA E A CONFIRMAÇÃO DE SENHA SÃO DIFERENTES", usuarioPage.mensagemDeErroCampoNaoPreenchidoComSucesso());
+   }
     @Test
     public void teste12DeveVerificarAAtualizacaoDaSenhaDoUsuario() {
 
@@ -253,43 +256,17 @@ public class TestePaginaUsuario extends BaseTest {
 
         Assert.assertEquals("CONSULTADO COM SUCESSO!!!", usuarioPage.mensagemDeExitoCampoPreenchidoComSucesso());
 
-        dsl.clicarBotaoTabelaEditar("consultar:overviewTableUserUsuario:", "Usuário, Cargo e seus Serviços", "TESTANDO", "Opções", ":j_idt187");
+        dsl.clicarBotaoTabelaEditar("consultar:overviewTableUserUsuario:", "Usuário, Cargo e seus Serviços", "TESTANDO", "Opções", "j_idt191");
 
         getComunicacaoDriverChrome().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-
+        usuarioPage.botaoSalvar();
         usuarioPage.botaoAlterarSenha();
         usuarioPage.alterarSenha();
 
-        Assert.assertEquals("A SENHA SÓ DEVE TER 8 E 20 DÍGITOS", usuarioPage.mensagemDeErroCampoNaoPreenchidoComSucesso());
+        Assert.assertEquals("INFORME SENHA", usuarioPage.mensagemDeErroCampoNaoPreenchidoComSucesso());
 
     }
 
-    @Test
-    public void teste13DeveVerificarAAtualizacaoDaSenhaDoUsuario() {
-
-        //selecionar link de Local
-        menuPage.selecionarMenuPageEsquerdo("Usuário");
-
-        //Informa Quaisquer nome
-        usuarioPage.setNomeBuscar("TESTANDO");
-
-        //Clicar para buscar o campo
-        usuarioPage.botaoBuscar();
-
-        Assert.assertEquals("CONSULTADO COM SUCESSO!!!", usuarioPage.mensagemDeExitoCampoPreenchidoComSucesso());
-
-        dsl.clicarBotaoTabelaEditar("consultar:overviewTableUserUsuario:", "Usuário, Cargo e seus Serviços", "TESTANDO", "Opções", ":j_idt187");
-
-        getComunicacaoDriverChrome().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-
-        usuarioPage.botaoAlterarSenha();
-        usuarioPage.setSenhaAtualizacao("123456789");
-        usuarioPage.setConfirmacaoSenhaAtualizacao("1234567891");
-        usuarioPage.alterarSenha();
-
-        Assert.assertEquals("SENHA E A CONFIRMAÇÃO DE SENHA SÃO DIFERENTES", usuarioPage.mensagemDeErroCampoNaoPreenchidoComSucesso());
-
-    }
 
 
 

@@ -1,10 +1,12 @@
 package org.sga.teste.funcional.pages;
 
+import com.beust.ah.A;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.sga.teste.funcional.core.DSL;
+import org.sga.teste.funcional.util.Acoes;
 import org.sga.teste.funcional.util.Sincronismo;
 
 import java.util.ArrayList;
@@ -19,8 +21,11 @@ public class UsuarioPage {
 
     private Sincronismo sincronismo;
 
+    private Acoes acoes;
+
     public UsuarioPage() {
         sincronismo = new Sincronismo();
+        acoes = new Acoes();
         dsl = new DSL();
     }
 
@@ -42,10 +47,10 @@ public class UsuarioPage {
     }
     //-Escrever para a alteracao de senha
     public void setSenhaAtualizacao(String senhaAtualizacao){
-        dsl.escreve("formulariosenhaeditarusuario:password",senhaAtualizacao);
+        dsl.escreve(By.xpath("//*[@id='formulariosenhaeditarusuario:password']"),senhaAtualizacao);
     }
     public void setConfirmacaoSenhaAtualizacao(String confirmacaoSenhaAtualizacao){
-        dsl.escreve("formulariosenhaeditarusuario:senha",confirmacaoSenhaAtualizacao);
+        dsl.escreve(By.xpath("//*[@id='formulariosenhaeditarusuario:senha']"),confirmacaoSenhaAtualizacao);
     }
     //--selecionar o tipo de unidade
     public void setSelecionarUnidade() {
@@ -60,22 +65,28 @@ public class UsuarioPage {
     }
     //--selecionar o tipo de cargo
     public void setSelecionarCargo() {
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+//        WebElement webDriverElement = getComunicacaoDriverChrome().findElement(By.xpath("formulariousuario:tabview:cargo"));
+////        dsl.executarJS("var objDiv = document.getElementById(\"servico_items\");\n" +
+////                "objDiv.scrollTop = objDiv.scrollHeight;",webDriverElement.getLocation().y);
+//        //dsl.executarJS("arguments[0].scrollTop = arguments[1];",webDriverElement,100);
+//        acoes.acaoScroll(webDriverElement);
         sincronismo.sincronismoExplicito(By.id("formulariousuario:tabview:cargo"));
         dsl.clicarBotao(By.xpath("//*[@id='formulariousuario:tabview:cargo']//span"));
-        dsl.clicarBotao(By.id("formulariousuario:tabview:cargo_2"));
+        //dsl.clicarBotao(By.id("formulariousuario:tabview:cargo_2"));
+        dsl.clicarBotao(By.xpath("//li[.='TESTANDO']"));
     }
     //--selecionar o tipo de status
     public void setSelecionarStatusAtivo() {
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         sincronismo.sincronismoExplicito(By.id("formulariousuario:tabview:status"));
         dsl.clicarBotao(By.xpath("//*[@id='formulariousuario:tabview:status']//span"));
         dsl.clicarBotao(By.id("formulariousuario:tabview:status_1"));
@@ -179,6 +190,10 @@ public class UsuarioPage {
     }
     public void alterarSenha(){
         dsl.clicarBotao(By.xpath("//*[@id='formulariosenhaeditarusuario']//..//span[.='Alterar']"));
+    }
+
+    public void fecharAlterarSenha(){
+        dsl.clicarBotao(By.xpath("//*[@id='formulariosenhaeditarusuario']//..//span[.='Fechar']"));
     }
 
 

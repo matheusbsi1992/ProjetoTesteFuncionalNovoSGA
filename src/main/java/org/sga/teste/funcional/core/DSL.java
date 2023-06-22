@@ -240,7 +240,12 @@ public class DSL {
             celula.click();
         }
         //*[@id='consultar:overviewTableUserLocal:4:j_idt181']
-        clicarBotao(By.xpath("//*[@id='" + idTabela + "" + (idLinha - 1) + "" + radical + "']"));
+        if(idTabela.equalsIgnoreCase("consultar:overviewTableUserUsuario:")){
+            idTabela=idTabela.replace("consultar:overviewTableUserUsuario:","consultar:");
+            clicarBotao(By.xpath("//*[@id='" + idTabela + "" + radical + "']"));
+        }else{
+            clicarBotao(By.xpath("//*[@id='" + idTabela + "" + (idLinha - 1) + "" + radical + "']"));
+        }
 
         //deleta item correspondente
 
