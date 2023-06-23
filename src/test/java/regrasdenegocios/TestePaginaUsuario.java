@@ -73,8 +73,9 @@ public class TestePaginaUsuario extends BaseTest {
         usuarioPage.setPassword("12345678");
         usuarioPage.setConfirmacaoPassword("12345678");
         usuarioPage.setSelecionarUnidade();
-        usuarioPage.setSelecionarCargo();
         usuarioPage.setSelecionarStatusAtivo();
+        usuarioPage.setSelecionarCargo();
+
 
         usuarioPage.botaoServicos();
         usuarioPage.retornarListadeValoresServico();
@@ -204,8 +205,9 @@ public class TestePaginaUsuario extends BaseTest {
         usuarioPage.setPassword("12345678");
         usuarioPage.setConfirmacaoPassword("12345678");
         usuarioPage.setSelecionarUnidade();
-        usuarioPage.setSelecionarCargo();
         usuarioPage.setSelecionarStatusAtivo();
+
+        usuarioPage.setSelecionarCargo();
 
         usuarioPage.botaoServicos();
         usuarioPage.retornarListadeValoresServico();
@@ -236,18 +238,28 @@ public class TestePaginaUsuario extends BaseTest {
 
         usuarioPage.botaoSalvar();
         usuarioPage.botaoAlterarSenha();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         usuarioPage.setSenhaAtualizacao("123456789");
         usuarioPage.setConfirmacaoSenhaAtualizacao("1234567891");
         usuarioPage.alterarSenha();
 
         Assert.assertEquals("SENHA E A CONFIRMAÇÃO DE SENHA SÃO DIFERENTES", usuarioPage.mensagemDeErroCampoNaoPreenchidoComSucesso());
+        usuarioPage.fecharAlterarSenha();
    }
     @Test
     public void teste12DeveVerificarAAtualizacaoDaSenhaDoUsuario() {
 
-        //selecionar link de Local
-        menuPage.selecionarMenuPageEsquerdo("Usuário");
-
+        try {
+            Thread.sleep(3000);
+            //selecionar link de Local
+            menuPage.selecionarMenuPageEsquerdo("Usuário");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         //Informa Quaisquer nome
         usuarioPage.setNomeBuscar("TESTANDO");
 
@@ -266,8 +278,5 @@ public class TestePaginaUsuario extends BaseTest {
         Assert.assertEquals("INFORME SENHA", usuarioPage.mensagemDeErroCampoNaoPreenchidoComSucesso());
 
     }
-
-
-
 
 }

@@ -47,6 +47,7 @@ public class UsuarioPage {
     }
     //-Escrever para a alteracao de senha
     public void setSenhaAtualizacao(String senhaAtualizacao){
+        //sincronismo.sincronismoExplicito(By.xpath("//*[@id='formulariosenhaeditarusuario:password']"));
         dsl.escreve(By.xpath("//*[@id='formulariosenhaeditarusuario:password']"),senhaAtualizacao);
     }
     public void setConfirmacaoSenhaAtualizacao(String confirmacaoSenhaAtualizacao){
@@ -54,42 +55,21 @@ public class UsuarioPage {
     }
     //--selecionar o tipo de unidade
     public void setSelecionarUnidade() {
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
         sincronismo.sincronismoExplicito(By.id("formulariousuario:tabview:unidade"));
         dsl.clicarBotao(By.xpath("//*[@id='formulariousuario:tabview:unidade']//span"));
         dsl.clicarBotao(By.id("formulariousuario:tabview:unidade_1"));
     }
     //--selecionar o tipo de cargo
     public void setSelecionarCargo() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-//        WebElement webDriverElement = getComunicacaoDriverChrome().findElement(By.xpath("formulariousuario:tabview:cargo"));
-////        dsl.executarJS("var objDiv = document.getElementById(\"servico_items\");\n" +
-////                "objDiv.scrollTop = objDiv.scrollHeight;",webDriverElement.getLocation().y);
-//        //dsl.executarJS("arguments[0].scrollTop = arguments[1];",webDriverElement,100);
-//        acoes.acaoScroll(webDriverElement);
         sincronismo.sincronismoExplicito(By.id("formulariousuario:tabview:cargo"));
         dsl.clicarBotao(By.xpath("//*[@id='formulariousuario:tabview:cargo']//span"));
-        //dsl.clicarBotao(By.id("formulariousuario:tabview:cargo_2"));
         dsl.clicarBotao(By.xpath("//li[.='TESTANDO']"));
     }
     //--selecionar o tipo de status
     public void setSelecionarStatusAtivo() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         sincronismo.sincronismoExplicito(By.id("formulariousuario:tabview:status"));
         dsl.clicarBotao(By.xpath("//*[@id='formulariousuario:tabview:status']//span"));
-        dsl.clicarBotao(By.id("formulariousuario:tabview:status_1"));
+        dsl.clicarBotao(By.xpath("//li[.='Ativo']"));
     }
 
     //campo contido para buscar o Texto inserido a seguir
@@ -164,6 +144,11 @@ public class UsuarioPage {
 
     //Botao contido na pagina de Listar
     public void botaoSalvar() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         dsl.clicarBotao(By.xpath("//span[.='Salvar']"));
     }
 
