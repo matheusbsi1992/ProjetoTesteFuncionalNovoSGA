@@ -284,9 +284,6 @@ public class DSL {
             clicarBotao(By.xpath("//*[@id='" + idTabela + "" + (idLinha - 1) + "" + radical + "']"));
         }
 
-
-
-
         //deleta item correspondente
 
         //celula.findElement(By.xpath("//span[.='Excluir']")).click();

@@ -6,9 +6,17 @@ public class Propriedades {
 
     public static Browser browser = Browser.CHROME;
 
+    public static TipoExecucao tipodeExecucao = TipoExecucao.NUVEM;
+
     public enum Browser {
         CHROME,
         FIREFOX
+    }
+
+    public enum TipoExecucao{
+        LOCAL,
+        GRID,
+        NUVEM
     }
 
 }

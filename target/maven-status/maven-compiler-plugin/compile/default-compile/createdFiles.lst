@@ -1,0 +1,15 @@
+org\sga\teste\funcional\core\Propriedades.class
+org\sga\teste\funcional\comunicacao\AcessoComunicacao$1.class
+org\sga\teste\funcional\util\Acoes.class
+org\sga\teste\funcional\pages\CargoPage.class
+org\sga\teste\funcional\pages\LoginPage.class
+org\sga\teste\funcional\core\Propriedades$Browser.class
+org\sga\teste\funcional\comunicacao\AcessoComunicacao.class
+org\sga\teste\funcional\pages\LocalPage.class
+org\sga\teste\funcional\pages\ServicoPage.class
+org\sga\teste\funcional\pages\UsuarioPage.class
+org\sga\teste\funcional\core\BaseTest.class
+org\sga\teste\funcional\pages\MenuPage.class
+org\sga\teste\funcional\util\Sincronismo.class
+org\sga\teste\funcional\pages\TriagemAlternativaPage.class
+org\sga\teste\funcional\core\DSL.class
